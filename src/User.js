@@ -8,16 +8,22 @@ export class User {
         this.name = name;
         this.signindate = signindate;
         this.preferences = preferences;
-        if (this.login==''&& this.password=='') { throw Error('Please provide us with login or password') }
-        
 
+    }
+
+    checkObject(){
+        if (!this.login || !this.password || !this.nickname || !this.name ||  !this.signindate || !this.preferences ) { 
+            throw Error('object is not fully correct')
+        }
+        
     }
 
     render(){
-        this.el.innerHTML= `<div>User name is ${this.login}, password : ${this.password}, nickname : ${this.nickname}, name : ${this.name}, sign in date is ${this.signindate}, preferences are ${this.preferences} </div>`
+        const newuser = document.createElement('div');
+        newuser.classList.add('users')
+        newuser.innerHTML = `<div>User name is ${this.login}, password : ${this.password}, nickname : ${this.nickname}, name : ${this.name}, sign in date is ${this.signindate}, preferences are ${this.preferences} </div>`
+        this.el.appendChild(newuser)
     
     }
-
-
     
 }
