@@ -13,7 +13,7 @@ export class User {
 
     checkObject(){
         if (!this.login || !this.password || !this.nickname || !this.name ||  !this.signindate || !this.preferences ) { 
-            throw Error('object is not fully correct')
+            throw Error('user object is not fully correct')
         }
         
     }
