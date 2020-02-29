@@ -1,34 +1,40 @@
 export class Article{
-    constructor(body, date, modificationDate, author, title, views, keywords ){
-        this.el = document.querySelector('#article-container')
-        this.body=body;
-        this.date=date;
-        this.modificationDate=modificationDate;
-        this.author = author;
-        this.title = title;
-        this.views=views;
-        this.keywords= keywords;
+    constructor(selector){
+        this.el = document.querySelector(selector)
+        this.posts=[]
     }
 
-    checkObject(){
-        if(!this.body || !this.date || !this.modificationDate || !this.author ||!this.title || !this.views || !this.keywords){
-            throw Error('article object is not fully correct')
-
-        }
+    loadPosts(posts){
+        this.posts=posts
     }
 
     render(){
-        const div = document.createElement('div');
-        div.classList.add('articles');
-        div.innerHTML = ` <p>${this.body}</p>
-        <p>date: ${this.date}</p>
-        <p>last modification date: ${this.modificationDate}</p>
-        <p>author: ${this.author}</p>
-        <p>title: ${this.title}</p>
-        <p>vie3ws: ${this.views}</p>
-        <p>keywords: ${this.keywords}</p><hr>`
-        this.el.appendChild(div)
+        this.el.innerHTML = ''
+
+        this.posts.forEach((post)=>{
+            const div= this.renderPost(post)
+            this.el.append(div)
+        })
+
+        if (this.posts.length==0){
+            this.el.innerHTML = `<div>No posts found</div>`
+        }
     }
 
+  
+
+    renderPost(post){
+        const div = document.createElement('div');
+        div.classList.add('articles');
+        div.innerHTML = `<p>${post.body}</p>
+                        <p>date: ${post.date}</p>
+                        <p>last modification date: ${post.modificationDate}</p>
+                        <p>author: ${post.author.username}</p>
+                        <p>title: ${post.title}</p>
+                        <p>vie3ws: ${post.views}</p>
+                        <p>keywords: ${post.keywords}</p><hr>`
+        return div
+        
+    }
 }
 
